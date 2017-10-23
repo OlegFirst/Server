@@ -1,0 +1,40 @@
+//@import url('autorization.css');
+
+body{
+	font-family: "Palatino Linotype", serif;
+}
+
+.pageTitle{
+	text-align: center;
+}
+
+.error{
+	color: red;
+}
+.success{
+	color: creen;
+}
+
+/* Section */
+.section{
+	width: 80%;
+	margin: 0 auto;
+}
+
+/*Input*/
+.input{
+	position: absolute;
+	width: 200px;
+	left: 50%;
+	top: 50px;
+	padding: 0;
+	display: none;
+}
+.input-list{
+	width: 100%;
+	padding-left: 0px;
+	box-shadow: 5px 5px 5px lightgrey;
+}
+.input-list-title{
+	font-weight: bold;
+}

@@ -1,0 +1,17 @@
+#loginForm{
+	margin-top: 100px;
+	width: 400px;
+}
+
+#form{
+	padding-bottom: 30px;
+}
+
+#submitButton{
+	float: right;
+}
+
+.info{
+	margin-top: 20px;
+	display: none;
+}

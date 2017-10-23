@@ -1,0 +1,28 @@
+body{
+	font-family: "Palatino Linotype", serif;
+}
+
+/*Section ---------------------------*/
+/*Tools*/
+.section-tools{
+	/*border: 1px solid;*/
+	/*overflow: auto;*/
+	width: 150px;
+	float: left;
+}
+.section-tools>button{
+	width: 100%;
+	margin: 2px 0;
+}
+
+/*Content*/
+main{
+	border: 1px solid;
+	overflow: auto;
+}
+
+/*Input ------------------------------*/
+#addPanel.input{
+	width: 380px;
+	left: 35%;
+}
