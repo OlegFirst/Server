@@ -18,13 +18,12 @@
 	
 	switch ($method){
 		case "GET":
-			if ($key1==="panel"){
+			if ($key1==="panel" || $key1==="filter"){
 				//Read panel pattern
-				readPattern("panel");
+				readPattern($key1);
 			}
 			else{
-				// Bad request
-				serverStatus(400);
+				serverStatus(404);
 			}
 			break;
 		case "PUT":
@@ -37,15 +36,11 @@
 	
 	//Read solar panel`s table and filter pattern
 	function readPattern($arg){
-		if ($arg==="panel"){
-			/*$res=array();
-			$res[]="statusMessage";
-			$res[]=$GLOBALS['solarPanel'][0];
-			echo $res;*/
-			
-			$res=json_encode($GLOBALS['solarPanel']);
-			echo $res;
-		}
+		if ($arg==="panel")
+			$res=$GLOBALS['solarPanelsJson'];
+		else
+			$res="filterArray";
+		echo $res;
 	}
 	
 ?>

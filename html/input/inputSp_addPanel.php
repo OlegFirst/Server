@@ -12,6 +12,7 @@
 		<li class="list-group-item">Висота панелі <input class="inputItem" type="text" required value="8"></li>
 		<li class="list-group-item">Ширина панелі <input class="inputItem" type="text" required value="9"></li>
 		<li class="list-group-item">Товщина панелі <input class="inputItem" type="text" required value="10"></li>
+		<li class="list-group-item">Вага панелі <input class="inputItem" type="text" required value="7"></li>
 		<li class="list-group-item">Рама <input class="inputItem" type="text" required value="11"></li>
 		<li class="list-group-item">Колір рами <input class="inputItem" type="text" required value="12"></li>
 		<li class="list-group-item">Кабель <input class="inputItem" type="text" required value="13"></li>
@@ -21,8 +22,8 @@
 		<li class="list-group-item">Ціна1 <input class="inputItem" type="text" required value="17"></li>
 		<li class="list-group-item">Ціна2 <input class="inputItem" type="text" required value="18"></li>
 		<li class="list-group-item">
-			<button type="button" class="input-list-button btn btn-link">Cancel</button>
-			<button type="button" class="input-list-button btn btn-success">OK</button>
+			<button type="button" class="input-list-button cancel btn btn-link">Cancel</button>
+			<button type="button" class="input-list-button ok btn btn-success">OK</button>
 		</li>
 	</ul>
 </div>

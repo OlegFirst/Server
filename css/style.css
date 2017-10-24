@@ -38,3 +38,18 @@ body{
 .input-list-title{
 	font-weight: bold;
 }
+
+/* Messages */
+.message{
+	position: absolute;
+	box-shadow: 5px 5px 5px lightgrey;
+	width: 80%;
+	display: none;
+}
+
+/* Centred */
+.center{
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
