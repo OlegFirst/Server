@@ -25,10 +25,9 @@ body{
 .input{
 	position: absolute;
 	width: 200px;
-	left: 50%;
-	top: 50px;
+	left: 50px;
 	padding: 0;
-	display: none;
+	/*display: none;*/
 }
 .input-list{
 	width: 100%;

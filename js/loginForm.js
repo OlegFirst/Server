@@ -9,10 +9,9 @@ $(document).ready(function(){
 		$(".info").css("display","none");
 		let login=$("#login").val();
 		let password=$("#password").val();
-		console.log(login, password);
 		if (login===userLogin && password===userPassword){
 			$("#infoSuccess").css("display","block");
-			window.location.pathname="/Server/html/home.php";
+			window.location.pathname="/Server/modules/home.php";
 		}
 		else{
 			$("#infoError").css("display","block");

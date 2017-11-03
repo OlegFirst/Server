@@ -6,6 +6,5 @@
 	$dbName="batar";
 	
 	//General
-	$panelTableName="goods_solarPanel";
 	$dbManipulatePassword="123";
 ?>

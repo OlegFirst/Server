@@ -4,28 +4,35 @@ body{
 
 /*Section ---------------------------*/
 /*Tools*/
-.section-tools{
+.solarPanel-section-tools{
 	position: fixed;
 	width: 150px;
 	float: left;
 }
-.section-tools>button{
+.solarPanel-section-tools>button{
 	width: 100%;
 	margin: 2px 0;
 }
 
 /*Content*/
-main{
-	/*border: 1px solid;*/
-	overflow: auto;
-	margin-left: 150px;
+.solarPanel-main{
+	position: relative;
+	/*overflow: auto;*/
+	margin-left: 170px;
 }
 
-/*Table pattern*/
-table{
+/*Table*/
+#solarPanelTable{
+	display: none !important;
+}
+.solarPanelTable{
 	position: relative;
 	width: 500px !important;
 	margin: 0 auto;
+	/*display: none;*/
+}
+.solarPanelTable th{
+	text-align: center;
 }
 .table-close{
 	position: absolute;
@@ -37,4 +44,5 @@ table{
 #addPanel.input{
 	width: 380px;
 	left: 35%;
+	z-index: 1;
 }

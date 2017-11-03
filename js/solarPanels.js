@@ -1,88 +1,104 @@
-$(document).ready(function(){
-	
-	let panelPattern=[], filterPattern=[];
-			
-	//Read patterns from data base
-	//Read panel pattern
-	ajax("GET","dataBase_solarPanels.php/panel",function(response){
-		if (response.success){
-			panelPattern=JSON.parse(response.message);
-			console.log(panelPattern);
-		}
-		else
-			//Show error
-			$(".message-content").text("Таблиця із зразком панелей не знайдена");
-	});
-	//Read filter pattern
-	ajax("GET","dataBase_solarPanels.php/filter",function(response){
-		//if (response.success)
-			//console.log("Read filter OK");
-	});
-	
-	/* Tools events */
-	
-	//Add new panel to the table
-	$("#toolsAddPanel").click(function(){
-		$("#addPanel.input").fadeIn();
-		//inputData=document.getElementById("addPanel").querySelectorAll(".inputItem");
-		//let json=JSONCreate(panelItemName,inputData);
-		/*ajax("PUT",json,function(response){
-			console.log(response);
-		});*/
-	});
-	$("#addPanel .ok").click(function(){
-		//Get data from input table
-		let inputs=document.getElementsByClassName("inputItem");
-		console.log(inputs);
-		for (let i=1; i<inputs.length; i++){
-			let value=inputs[i].value;
-			console.log(value);
-		}
-	});
-	$("#addPanel .cancel").click(function(){
-		$("#addPanel.input").fadeOut();
-	});
-	
-	//Panels pattern shows
-	$("#toolsPanelPattern").click(function(){
-		//Check if exist
-		if (document.getElementById("panelPattern")==null){
-			//Creating table parameters
-			let tableContent={
-				"thead": ["goods_solarPanel"],
-				"tbody": panelPattern
-			};
-			tableCreate(tableContent,"panelPattern");
-		}
-	});
-	
-	//Filter pattern shows
-	$("#toolsFilterPattern").click(function(){
-		//Creating pattern array
-		filterPattern.push({
-			"name": panelPattern[0].name,
-			"value": ["value1","value2","value3"]
-		});
-		//Creating table parameters
-		let tableContent={
-			"thead": ["filter_solarPanel"],
-			"tbody": filterPattern
-		};
-		tableCreate(tableContent,"filterPattern");
-	});
-		
-});
+let panelCollection=[];
 
-//JSON create
-function JSONCreate(itemName,itemValue){
-	console.log(itemName);
-	console.log(itemValue);
-	let json={};
-	let i=0;
-	for (i=0; i<itemName.length; i++){
-		let index=itemName[i];
-		json[index]=itemValue[i].value;
+//Input solar panel ----------------------------------------------------
+
+//Get selected item parameter
+function solarPanels_dropdown(arg){
+	let className=arg.className;
+	let button=arg.parentNode.parentNode.parentNode;
+	button=button.getElementsByTagName("button")[0];
+	$(button).text(arg.text);
+	//Change button id as an element id
+	let id=$(button).attr("id");
+	let pos=id.indexOf("_");
+	if (pos!=-1)
+		id=id.slice(0,pos);
+	id=id+"_"+className;
+	$(button).attr("id",id);
+}
+//Input solar panel. "OK" is clicked.
+function solarPanels_OK(){
+	panelCollection=[];
+	//Get data from table
+	let table=document.querySelector("#addPanel");
+	items=table.getElementsByClassName("item");
+	let isValid=true;
+	for (let i=0; i<items.length; i++){
+		let item=items[i];
+		let id="#"+$(item).attr("id");
+		let value=$(id).val();
+		let text=$(id).text();
+		let res=null;
+		if (value=="")
+			res=text;
+		else
+			res=value;
+		if (res==="Dropdown" || res===""){
+			res="empty";
+			isValid=false;
+		}
 	}
-	json=JSON.stringify(json);
-	return json;
+	if (!isValid)
+		alert("Усі поля мають бути заповнені");
+	else{
+		//Table clones
+		/*table=document.querySelector("#solarPanelTable");
+		let cln=table.cloneNode(table);
+		document.getElementsByClassName("solarPanel-main")[0].appendChild(cln);
+		let tables=document.getElementsByClassName("solarPanelTable");
+		table=tables[tables.length-1];
+		$(table).attr("id","solarPanelTable1");
+		$(table).removeClass("solarPanelTable");
+		$(table).addClass("solarPanels");*/
+		//Show/hide
+		$(".solarPanels").fadeIn();
+		$("#addPanel").fadeOut();
+		//Creating model
+		let id=item=itemId=value="";
+		for (let i=0; i<items.length; i++){
+			item=items[i];
+			id="#"+$(item).attr("id");
+			let value=$(id).val();
+			let text=$(id).text();
+			if (value=="")
+				value=text;
+			//Element id parsing
+			id=id.replace("#","");
+			let pos=id.indexOf("_");
+			if (pos!=-1){
+				itemId=id.slice(0,pos);
+				value=+id.slice(pos+1,id.length);				
+			}
+			else
+				itemId=id;
+			let panel=new Panel(itemId,value);
+			panelCollection.push(panel);
+		}
+		let json=JSON.stringify(panelCollection);
+		//json='[{"id":"model","value":"a"},{"id":"makerId","value":2},{"id":"manufacturerId","value":1}]';
+		console.log(json);
+		//Add table to data base
+		ajax("POST","dataBase.php/solarPanel",json,function(callBack){
+			console.log(callBack);
+		});
+	}
+}
+function solarPanels_cancel(){
+	//Show/hide
+	$(".solarPanels").fadeIn();
+	$("#addPanel").fadeOut();
+}
+
+//Creating new solar panel ----------------------------------------------------------
+function solarPanels_panelCreate(){
+	//Fields clear
+	/*table=document.querySelector("#addPanel");
+	items=table.getElementsByClassName("item");
+	for (let i=0; i<items.length; i++){
+		let id="#"+$(items[i]).attr("id");
+		$(id).val("");
+	}*/
+	//Show/hide
+	$(".solarPanels").fadeOut();
+	$("#addPanel").fadeIn();	
 }

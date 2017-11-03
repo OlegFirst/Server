@@ -2,6 +2,10 @@
 	
 	function serverStatus($statusNumber){
 		switch ($statusNumber){
+			case (200):
+				header("HTTP/1.1 200 OK");
+				//echo "Good";
+				break;
 			case (400):
 				header("HTTP/1.1 400 OK");
 				//echo "Bad request";
