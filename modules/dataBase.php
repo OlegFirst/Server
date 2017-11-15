@@ -1,6 +1,7 @@
 <?php
 	include "../config.php";
-	//Manipulation with "solar panels tables"
+	//Manipulation with "solar panels"
+	//include "solarPanels/solarPanels.php";
 	include "solarPanels/dataBase_solarPanels.php";
 	//Showing database work
 	include "serverStatus.php";
@@ -14,7 +15,7 @@
 	//arg_message/$key1/$key2
 	$key1=array_shift($request);
 	$key2=array_shift($request);
-		
+					
 	//Data base create/delete
 	if ($_SERVER["REQUEST_METHOD"]==POST && $_POST["dataBase"]==="dataBaseCreate" || $_SERVER["REQUEST_METHOD"]==POST && $_POST["dataBase"]==="dataBaseDelete"){
 		if ($_POST["dataBase"]==="dataBaseCreate" && $_POST["password"]===$GLOBALS['dbManipulatePassword']){
@@ -32,7 +33,17 @@
 	//Tables create/delete/update
 	switch ($method){
 		case "GET":
-			echo "GET";
+			if ($key1==="solarPanelGetAll"){
+				// ($key1==="solarPanel" && strlen($key2)==0)
+				//Read all 'solarPanel'
+				$solarPanelsAll=readSolarPanelAll();
+				echo json_encode($solarPanelsAll);
+			}
+			if ($key1==="solarPanelLast"){
+				//Read last inserted "solarPanel" (has max 'id' in the table)
+				$lastId=solarPanel_lastId();
+				echo json_encode(readSolarPanel($lastId));
+			}
 			break;
 		case "PUT":
 			echo "PUT";
@@ -41,19 +52,19 @@
 			if ($key1==="solarPanel"){
 				//Updating 'solar panel table'
 				$obj=json_decode($_POST['json'],true);
-				//print_r($obj);
 				solarPanelUpdate($obj);
 			}
 			else
 				echo "Not POST";
 			break;
+		case "DELETE":
+			if ($key1==="solarPanel" && strlen($key2)){
+				deleteSolarPanel($key2);
+			}
+		break;
 		default:
 			echo "Bad request";
 	}
-	
-	// Bad request
-		//echo "Bad request";
-		//serverStatus(400);
 	
 	function createDataBase(){
 		//Create database
@@ -80,6 +91,6 @@
 			";
 		}
 		$conn->close;
-	}
+	}	
 		
 ?>

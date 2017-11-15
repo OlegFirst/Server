@@ -39,10 +39,28 @@ body{
 	right: 10px;
 	top: 10px;
 }
+.solarPanels{
+	/*display: none;*/
+}
+.remove{
+	cursor: pointer;
+}
+.remove:hover{
+	box-shadow: 5px 5px 5px lightgrey;
+}
 
 /*Input ------------------------------*/
 #addPanel.input{
 	width: 380px;
 	left: 35%;
 	z-index: 1;
+}
+.list-group-item-photo{
+	height: 100px;
+	width: 100%;
+	overflow: hidden;
+}
+.list-group-item-photo>img{
+	height: 100%;
+	width: auto;
 }

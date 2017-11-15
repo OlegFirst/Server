@@ -7,4 +7,7 @@
 	
 	//General
 	$dbManipulatePassword="123";
+	
+	//Photos folder
+	$photosFolder="photoes";
 ?>

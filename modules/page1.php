@@ -17,6 +17,7 @@
 	<!-- <script src="../js/dataBase/dataBaseService.js"></script> -->
 	<script src="../js/dataBase/ajax.js"></script>
 	<script src="../js/dataBase/dataBaseError.js"></script>
+	<script src="../js/navigator.js"></script>
 </head>
 <body>
 
@@ -24,19 +25,24 @@
 
 	<?php include "header.php" ?>
 	
+	<!-- Different working information -->
+	<?php include "workInformation.php" ?>
+	
 	<div class="pageTitle well">
 		<h1>Сонячні панелі</h1>
 	</div>
 	<br>
 	
-	<section class="section container">	
+	<section class="section container">
+		<!-- Image loader -->
+		<?php include "imageLoader/scanDir.html" ?>
 		<!-- Tables tools -->
 		<div class="solarPanel-section-tools">
 			<button id="toolsAddPanel" type="button" class="btn btn-primary" onclick="solarPanels_panelCreate()">Додати панель</button>
-			<button type="button" class="btn btn-danger">Видалити панель</button>
-			<button type="button" class="btn btn-primary">Редагувати панель</button>
+			<button id="toolsRemovePanel" type="button" class="btn btn-danger" onclick="solarPanels_panelRemove()">Видалити панель</button>
+			<button id="toolsEditPanel" type="button" class="btn btn-primary">Редагувати панель</button>
 			<button id="toolsPanelPattern" type="button" class="btn btn-primary">Зразок панелей</button>
-			<button id="toolsFilterPattern" type="button" class="btn btn-primary">Фільтр</button>
+			<button id="toolsFilterPanel" type="button" class="btn btn-primary">Фільтр</button>
 		</div>
 		<main class="solarPanel-main">
 			<!-- Table patterns -->
@@ -48,6 +54,8 @@
 			<p class="message-content"></p>
 		</div>		
 	</section>
+	
+	<div id="image"></div>
 	
 	<!-- <button type="button" onclick="clone1()">Clone</button> -->
 	
